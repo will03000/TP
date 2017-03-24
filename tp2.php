@@ -1,17 +1,17 @@
-	<?php 
+<?php 
 	$erreur = [];
-	$pdo = new PDO('mysql:dbname=Tp1;host=localhost;charset=utf8','root', '');
+	$pdo = new PDO('mysql:dbname=Tp2;host=localhost;charset=utf8','root', '');
 	$pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 	$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-	$statement = $pdo->query("SELECT id , NomDuService FROM Services");
+	$statement = $pdo->query("SELECT id , Statut FROM StatutMarital");
 	$resultat2 = $statement->fetchAll();
-	$statement = $pdo->query("SELECT Utilisateur.id,Utilisateur.Nom , Utilisateur.Prenom , Utilisateur.DateDeNaissance , Utilisateur.Adresse , Utilisateur.CodePostal , Utilisateur.NumTel , Utilisateur.Service, Services.NomDuService FROM Utilisateur, Services WHERE Utilisateur.Service = Services.id ");
+	
+	$statement = $pdo->query("SELECT client.id,client.Nom , client.Prenom , client.DateDeNaissance , client.Adresse , client.CodePostal , client.NumeroTel , client.StatutMarital, StatutMarital.Statut FROM client, StatutMarital WHERE client.StatutMarital = StatutMarital.id ");
 	$resultat = $statement->fetchAll();
 	if (isset($_POST)) {
 		
 		$donnee = [];
 		
-		var_dump($donnee);
 		if (isset($_POST['Nom']) && $_POST['Nom'] !== ''){
 			$donnee['Nom'] = $_POST['Nom'];
 		}else{
@@ -37,30 +37,29 @@
 		}else{
 			$erreur[] = 'Saisissez un Code Postal';
 		}
-		if (isset($_POST['NumTel'])) {
-				$donnee['NumTel'] = $_POST['NumTel'];
+		if (isset($_POST['NumeroTel'])) {
+				$donnee['NumeroTel'] = $_POST['NumeroTel'];
 		}else{
 			$erreur[] = 'Saisissez un Numéro de téléphone';
 		}
-		if (isset($_POST['Service'])) {
-				$donnee['Service'] = $_POST['Service'];
+		if (isset($_POST['StatutMarital'])) {
+				$donnee['StatutMarital'] = $_POST['StatutMarital'];
 		}else{
-			$erreur[] = 'Saisissez un Service';
+			$erreur[] = 'Saisissez un StatutMarital';
 		}			
 			
 		if (empty($erreur)) {
 			
-			$statement = $pdo->prepare('INSERT INTO Utilisateur 
+			$statement = $pdo->prepare('INSERT INTO client 
 										SET Nom = :Nom,
 											Prenom = :Prenom,
 											DateDeNaissance = :DateDeNaissance,
 											Adresse = :Adresse,
 											CodePostal = :CodePostal,
-											NumTel = :NumTel,
-											Service = :Service
+											NumeroTel = :NumeroTel,
+											StatutMarital = :StatutMarital
 											');
 			$statement->execute($donnee);
-
 
 			$erreur[] = 'le client est bien ajouté';
 		}
@@ -92,10 +91,10 @@
 		<input type="date" name="DateDeNaissance">
 		<input type="text" name="Adresse" placeholder="Adresse">
 		<input type="text" name="CodePostal" placeholder="CodePostal">
-		<input type="text" name="NumTel" placeholder="numero de tel">
-		<select name="Service">
+		<input type="text" name="NumeroTel" placeholder="numero de tel">
+		<select name="StatutMarital">
 			<?php foreach ($resultat2 as $key=>$value) :?> 
-				<option <?="value=".$value->id ?>><?=$value->NomDuService ?></option>
+				<option <?="value=".$value->id ?>><?=$value->Statut ?></option>
 			<?php endforeach ?>
 		</select>
 		<button type="submit">ok</button>
@@ -103,7 +102,7 @@
 		
 	</form>
 
-	<a href="tp1.php">Retour au tableau des utilisateursww</a>
+	
 
 	</body>
 	</html>
