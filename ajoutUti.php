@@ -11,7 +11,6 @@
 		
 		$donnee = [];
 		
-		var_dump($donnee);
 		if (isset($_POST['Nom']) && $_POST['Nom'] !== ''){
 			$donnee['Nom'] = $_POST['Nom'];
 		}else{
@@ -103,7 +102,7 @@
 		
 	</form>
 
-	<a href="tp1.php">Retour au tableau des utilisateursww</a>
+	<a href="tp1.php">Retour au tableau des utilisateurs</a>
 
 	</body>
 	</html>

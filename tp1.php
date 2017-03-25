@@ -39,6 +39,7 @@ $resultat2 = $statement->fetchAll();
 <html>
 <head>
 	<title>tp1</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
 
@@ -78,7 +79,7 @@ $resultat2 = $statement->fetchAll();
 				<td><?= $value->Nom; ?></td>
 				<td><?= $value->Prenom; ?></td>
 				<td><?= $value->DateDeNaissance; ?></td>
-				<td><?= $value->Adresse , $value->CodePostal ?></td>
+				<td><?= $value->Adresse."<br>".$value->CodePostal ?></td>
 				<td><?= $value->NumTel; ?></td>
 				<td><?= $value->NomDuService; ?></td>
 			</tr>

@@ -101,7 +101,11 @@
 
 		
 	</form>
-
+<ul>
+	<li><a href="AjoutCredit.php">Ajout crédit</a></li>
+	<li><a href="Listeclient.php">Liste client</a></li>
+	<li><a href="tabclient.php">Détails client</a></li>
+</ul>
 	
 
 	</body>

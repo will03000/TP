@@ -51,6 +51,10 @@
 		<input type="text" name="Montant" placeholder="Montant">
 		<button type="submit">OK</button>
 	</form>
+
+	<ul>
+		<li><a href="tp2.php">index</a></li>
+	</ul>
 	</body>
 	</html>
 	

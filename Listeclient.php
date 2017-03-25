@@ -9,7 +9,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+	<title>liste client</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
 
@@ -37,6 +38,12 @@
 
 		</tbody>
 </table>
+
+<ul>
+	<li>
+		<a href="tp2.php">index</a>
+	</li>
+</ul>
 
 </body>
 </html>
