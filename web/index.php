@@ -1,24 +1,41 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>index</title>
-</head>
-<body>
+<?php
+use Core\Auth\DBAuth;
+define('ROOT', dirname(__DIR__));
+require ROOT.'/app/App.php';
+App::load();
 
+if (isset($_GET['p'])) {
+	$page = $_GET['p'];
+}else{
+	$page = "home";
+}
 
-	<div>
-		<li><a href="tp1.php">Tp1</a></li>
-		<li><a href="ajoutUti.php">Ajout client tp1</a></li>
-	</div>
+//////////////bouton connect
+$app = App::getInstance();
+$auth = new DBAuth($app->getDb());
+if ($auth->logged()) {
+	$connect = "Disconnect";
+}else{
+	$connect = "login";
+}
+/////////////////////////
 
-	<div>
-		<li><a href="tp2.php">Tp2</a></li>
-		<li><a href="Listeclient.php">Liste client par nom Tp2</a></li>
-		<li><a href="AjoutCredit.php">Ajout d'un crédit Tp2</a></li>
-		<li><a href="tabclient.php">Détail client Tp2</a></li>
-	</div>
-
-
-
-</body>
-</html>
+ob_start();
+if ($page==='home') {
+	require ROOT.'/pages/index.php';
+}elseif ($page==='utilisateurs.index') {
+	require ROOT.'/pages/utilisateurs/index.php';
+}elseif ($page==='utilisateurs.service') {
+	require ROOT.'/pages/utilisateurs/service.php';
+//suite page oligatoire
+}elseif ($page==='login') {
+	require ROOT.'/pages/users/login.php';
+}elseif ($page==='Disconnect') {
+	require ROOT.'/pages/users/disconnect.php';
+}elseif ($page==='403') {
+	require ROOT.'/pages/errors/403.php';
+}else{ // page 404
+	require ROOT.'/pages/errors/404.php';
+}
+$content = ob_get_clean();
+require ROOT.'/pages/templates/default.php'; 
